@@ -470,23 +470,95 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
-/***/ "./src/test.js":
-/*!*********************!*\
-  !*** ./src/test.js ***!
-  \*********************/
+/***/ "./src/app-logic/addToProject.js":
+/*!***************************************!*\
+  !*** ./src/app-logic/addToProject.js ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// test module
+// module responsible for placing listItems into "project" arrays
 
-const test = () => {
-    console.log('test successful!');
+//how items are added
+const addToProject = (array, object, index = undefined) => {
+    if (index === undefined) { // no specified index
+        array.push(object); // object is added at the end
+    } else if (index <= array.length()) {
+        array.splice(index, 0, object); //object goes to specified index
+    } else {
+        console.log ('addToProject ERROR');
+    }
+        
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (test);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (addToProject);
+
+
+/***/ }),
+
+/***/ "./src/app-logic/itemMaker.js":
+/*!************************************!*\
+  !*** ./src/app-logic/itemMaker.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// module responsible for creating to do list objects, given their properties
+
+    class ListItem {
+        constructor(title, description, dueDate, priority) {
+            this.title = title;
+            this.description = description;
+            this.dueDate = dueDate;
+            this.priority = priority;
+            
+        };
+        
+        getTitle () {
+            return this.title;
+        }
+
+        setTitle (newTitle) {
+            this.title = newTitle;
+            return this.title;
+        }
+    }
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ListItem);
+
+/***/ }),
+
+/***/ "./src/app-logic/removeFromProject.js":
+/*!********************************************!*\
+  !*** ./src/app-logic/removeFromProject.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// module governing how items can be removed from 'project' arrays
+
+// how items are removed
+const removeFromProject = (array, itemIndex) => {
+
+    if (!(itemIndex <= array.length)) {
+        console.log ("removeFromProject ERROR");
+    } else {
+        array.splice(itemIndex, 1)
+    }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (removeFromProject);
 
 /***/ })
 
@@ -570,13 +642,37 @@ var __webpack_exports__ = {};
   !*** ./src/index.js ***!
   \**********************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _src_test_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/test.js */ "./src/test.js");
-/* harmony import */ var _src_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/style.css */ "./src/style.css");
+/* harmony import */ var _src_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/style.css */ "./src/style.css");
+/* harmony import */ var _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-logic/itemMaker.js */ "./src/app-logic/itemMaker.js");
+/* harmony import */ var _app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app-logic/addToProject.js */ "./src/app-logic/addToProject.js");
+/* harmony import */ var _app_logic_removeFromProject_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-logic/removeFromProject.js */ "./src/app-logic/removeFromProject.js");
+
+
+
+
 
 
 
 console.log('ready to roll!');
-(0,_src_test_js__WEBPACK_IMPORTED_MODULE_0__["default"])();
+
+
+
+const defaultProject = []; // the project that all items are added to by default
+
+///test: first list item
+const testItem = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"]('Laundry', 'do the laundry', 'today', '2');
+
+(0,_app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultProject, testItem);
+console.log(defaultProject); // addToProject works
+
+
+const test2 = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"] ('TEST', 'test', 'today', '1');
+(0,_app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultProject, test2);
+console.log(defaultProject);
+
+
+
+
 })();
 
 /******/ })()
