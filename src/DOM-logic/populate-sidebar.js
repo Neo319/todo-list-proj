@@ -1,5 +1,5 @@
 // module to generate the base page layout
-import ListItem from "../app-logic/itemMaker";
+import projectManager from "../app-logic/projectManager";
 
 const populatePage = (allProjects) => {
     const header = document.getElementById("header");
@@ -40,7 +40,12 @@ const populatePage = (allProjects) => {
                 addItemBtn.id = "addItemBtn";
                 addItemBtn.classList = (project[0]); // class list provides project title
                 myItemsList.appendChild(addItemBtn);
-    
+
+
+                //adding event listeners 
+                
+
+
             myProject.appendChild(myItemsList)
     
             projectsList.appendChild(myProject);
@@ -57,14 +62,13 @@ const populatePage = (allProjects) => {
 
 
     //adding event listeners
-    newProjBtn.addEventListener('click', createNewProject);
+    newProjBtn.addEventListener('click', () => {
+        projectManager(allProjects).createNewProject(); // adds a new project to allprojects
+        createSidebarList(); // reloads sidebar content
+    });
 
-    function createNewProject () { // create new project whose contents can be edited elsewhere, & reload sidebar
-        let myItem = new ListItem ('New To-do item', 'description', 'today', 1, false);
-        let myProj = ['New Project', myItem];
-        allProjects.push(myProj);
-        createSidebarList(); //reload sidebar with new content
-    }
+    
+
 
     };
     createSidebarList();
