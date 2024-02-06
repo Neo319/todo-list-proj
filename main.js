@@ -480,7 +480,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/itemMaker */ "./src/app-logic/itemMaker.js");
+/* harmony import */ var _app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/projectManager */ "./src/app-logic/projectManager.js");
 // module to generate the base page layout
 
 
@@ -523,7 +523,12 @@ const populatePage = (allProjects) => {
                 addItemBtn.id = "addItemBtn";
                 addItemBtn.classList = (project[0]); // class list provides project title
                 myItemsList.appendChild(addItemBtn);
-    
+
+
+                //adding event listeners 
+                
+
+
             myProject.appendChild(myItemsList)
     
             projectsList.appendChild(myProject);
@@ -540,14 +545,13 @@ const populatePage = (allProjects) => {
 
 
     //adding event listeners
-    newProjBtn.addEventListener('click', createNewProject);
+    newProjBtn.addEventListener('click', () => {
+        (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects).createNewProject(); // adds a new project to allprojects
+        createSidebarList(); // reloads sidebar content
+    });
 
-    function createNewProject () { // create new project whose contents can be edited elsewhere, & reload sidebar
-        let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 1, false);
-        let myProj = ['New Project', myItem];
-        allProjects.push(myProj);
-        createSidebarList(); //reload sidebar with new content
-    }
+    
+
 
     };
     createSidebarList();
@@ -634,6 +638,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ListItem);
+
+/***/ }),
+
+/***/ "./src/app-logic/projectManager.js":
+/*!*****************************************!*\
+  !*** ./src/app-logic/projectManager.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/itemMaker */ "./src/app-logic/itemMaker.js");
+// module for adding, removing, and editing projects
+
+
+const projectManager = (allProjects) => {
+
+        function createNewProject () { // create new project whose contents can be edited elsewhere, 
+            let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 1, false);
+            let myProj = ['New Project', myItem];
+            allProjects.push(myProj);
+        }
+
+    return {
+        createNewProject,
+    }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (projectManager);
 
 /***/ }),
 
