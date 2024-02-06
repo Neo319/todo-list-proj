@@ -39,12 +39,17 @@ const populatePage = (allProjects) => {
                 addItemBtn.textContent = 'ADD NEW ITEM';
                 addItemBtn.id = "addItemBtn";
                 addItemBtn.classList = (project[0]); // class list provides project title
-                myItemsList.appendChild(addItemBtn);
-
-
-                //adding event listeners 
                 
 
+                //adding event listeners 
+                // on click, addListItem is called & given the index of the current project to have a new item added
+                addItemBtn.addEventListener('click', () => {
+                    projectManager(allProjects).addListItem(allProjects.indexOf(project));
+                    createSidebarList();
+                });
+                
+
+                myItemsList.appendChild(addItemBtn);
 
             myProject.appendChild(myItemsList)
     
