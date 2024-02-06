@@ -480,7 +480,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/itemMaker */ "./src/app-logic/itemMaker.js");
 // module to generate the base page layout
+
 
 const populatePage = (allProjects) => {
     const header = document.getElementById("header");
@@ -497,39 +499,64 @@ const populatePage = (allProjects) => {
     const sidebar = document.createElement('div');
     const projectsList = document.createElement('ul');
 
-    //access an array from index.js to list all PROJECTS
-    allProjects.forEach(project => {
-        let myProject = document.createElement('li');
-        myProject.textContent = project[0]; // display the title of the project
-        
-        let myItemsList = document.createElement('ul');
+    function createSidebarList  () { 
+        //begin by wiping content
+        projectsList.innerHTML = '';
 
-            project.forEach(item => { // loop to display the title of each ITEM
-                if (item.title) { 
-                    let myItem = document.createElement('li');
-                    myItem.textContent = item.title;
-                    myItemsList.appendChild(myItem);
-                };
-            });
+        allProjects.forEach(project => {
+            let myProject = document.createElement('li');
+            myProject.textContent = project[0]; // display the title of the project
+            
+            let myItemsList = document.createElement('ul');
+    
+                project.forEach(item => { // loop to display the title of each ITEM
+                    if (item.title) { 
+                        let myItem = document.createElement('li');
+                        myItem.textContent = item.title;
+                        myItemsList.appendChild(myItem);
+                    };
+                });
+    
+                //btn to add new item to project
+                let addItemBtn = document.createElement('button');
+                addItemBtn.textContent = 'ADD NEW ITEM';
+                addItemBtn.id = "addItemBtn";
+                addItemBtn.classList = (project[0]); // class list provides project title
+                myItemsList.appendChild(addItemBtn);
+    
+            myProject.appendChild(myItemsList)
+    
+            projectsList.appendChild(myProject);
+            console.log(myProject);
+        });
 
-            //btn to add new item to project
-            let addItemBtn = document.createElement('button');
-            addItemBtn.textContent = 'ADD NEW ITEM';
-            addItemBtn.id = "addItemBtn";
-            addItemBtn.classList = (project[0]); // class list provides project title
-            myItemsList.appendChild(addItemBtn);
 
-        myProject.appendChild(myItemsList)
-
-        projectsList.appendChild(myProject);
-        console.log(myProject);
-    });
 
     //btn to add new project
     const newProjBtn = document.createElement('button');
     newProjBtn.textContent = "ADD NEW PROJECT";
     newProjBtn.id = "newProjBtn";
     projectsList.appendChild(newProjBtn);
+
+
+    //adding event listeners
+    newProjBtn.addEventListener('click', createNewProject);
+
+    function createNewProject () { // create new project whose contents can be edited elsewhere, & reload sidebar
+        let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 1, false);
+        let myProj = ['New Project', myItem];
+        allProjects.push(myProj);
+        createSidebarList(); //reload sidebar with new content
+    }
+
+    };
+    createSidebarList();
+    
+    
+
+
+
+
 
     sidebar.appendChild(projectsList);
     main.appendChild(sidebar);
@@ -538,14 +565,7 @@ const populatePage = (allProjects) => {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (populatePage);
 
-// left side: 'main viewport'
-// right side: 'sidebar'
 
-
-
-// ... another js module will determine how event listeners are added and 
-// there should be different modules for the following screens:
-// default: project viewer; item viewer; view all projects; create new project (modal)
 
 /***/ }),
 
@@ -592,11 +612,12 @@ __webpack_require__.r(__webpack_exports__);
 // module responsible for creating to do list objects, given their properties
 
     class ListItem {
-        constructor(title, description, dueDate, priority) {
+        constructor(title, description, dueDate, priority, completed) {
             this.title = title;
             this.description = description;
             this.dueDate = dueDate;
             this.priority = priority;
+            this.completed = completed;
             
         };
         
@@ -608,6 +629,7 @@ __webpack_require__.r(__webpack_exports__);
             this.title = newTitle;
             return this.title;
         }
+
     }
 
 
@@ -741,12 +763,13 @@ console.log('ready to roll!');
 const defaultProject = ['defaultProject']; // the project that all items are added to by default
 // the first item in every project array is a string containing its title
 
-const testItem = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"]('Laundry', 'do the laundry', 'today', '2');
+// listItem properties: Title, description, dueDate, priority, completed
+const testItem = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"]('Laundry', 'do the laundry', 'today', '2', false);
 
 (0,_app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultProject, testItem);
 
 
-const test2 = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"] ('TEST', 'test', 'today', '1');
+const test2 = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"] ('TEST', 'test', 'today', '1', false);
 (0,_app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultProject, test2);
 
 
@@ -757,7 +780,11 @@ const allProjects = [defaultProject];
 console.log(allProjects);
 
 
-// add event listeners to create new items
+
+
+
+
+
 
 
 })();
