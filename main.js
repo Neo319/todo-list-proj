@@ -522,12 +522,17 @@ const populatePage = (allProjects) => {
                 addItemBtn.textContent = 'ADD NEW ITEM';
                 addItemBtn.id = "addItemBtn";
                 addItemBtn.classList = (project[0]); // class list provides project title
-                myItemsList.appendChild(addItemBtn);
-
-
-                //adding event listeners 
                 
 
+                //adding event listeners 
+                // on click, addListItem is called & given the index of the current project to have a new item added
+                addItemBtn.addEventListener('click', () => {
+                    (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects).addListItem(allProjects.indexOf(project));
+                    createSidebarList();
+                });
+                
+
+                myItemsList.appendChild(addItemBtn);
 
             myProject.appendChild(myItemsList)
     
@@ -663,8 +668,16 @@ const projectManager = (allProjects) => {
             allProjects.push(myProj);
         }
 
+        function addListItem (projectIndex) {
+            let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 1, false);
+            
+            let project = allProjects[projectIndex];
+            project.push(myItem);
+        }
+
     return {
         createNewProject,
+        addListItem,
     }
 }
 
