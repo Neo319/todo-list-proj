@@ -4,23 +4,30 @@ import ListItem from './app-logic/itemMaker.js';
 import addToProject from './app-logic/addToProject.js';
 import removeFromProject from './app-logic/removeFromProject.js';
 
+import populatePage from './DOM-logic/populate-sidebar.js';
 
 console.log('ready to roll!');
 
 
 
-const defaultProject = []; // the project that all items are added to by default
+const defaultProject = ['defaultProject']; // the project that all items are added to by default
+// the first item in every project array is a string containing its title
 
-///test: first list item
 const testItem = new ListItem('Laundry', 'do the laundry', 'today', '2');
 
 addToProject(defaultProject, testItem);
-console.log(defaultProject); // addToProject works
 
 
 const test2 = new ListItem ('TEST', 'test', 'today', '1');
 addToProject(defaultProject, test2);
-console.log(defaultProject);
 
 
+
+const allProjects = [defaultProject];
+populatePage(allProjects);
+
+console.log(allProjects);
+
+
+// add event listeners to create new items
 
