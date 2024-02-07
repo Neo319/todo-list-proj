@@ -1,4 +1,5 @@
 // module to generate the base page layout
+import { create } from "yallist";
 import projectManager from "../app-logic/projectManager";
 
 const populatePage = (allProjects) => {
@@ -30,6 +31,18 @@ const populatePage = (allProjects) => {
                     if (item.title) { 
                         let myItem = document.createElement('li');
                         myItem.textContent = item.title;
+
+                        //btn for removing an item
+                        const removeItemBtn = document.createElement('button');
+                        removeItemBtn.textContent = "-";
+
+                        removeItemBtn.addEventListener('click', () => {
+                           projectManager(allProjects).removeItem(allProjects.indexOf(project), project.indexOf(item));
+                           createSidebarList();
+                        });
+
+                        myItem.appendChild(removeItemBtn);
+
                         myItemsList.appendChild(myItem);
                     };
                 });
@@ -47,14 +60,29 @@ const populatePage = (allProjects) => {
                     projectManager(allProjects).addListItem(allProjects.indexOf(project));
                     createSidebarList();
                 });
+            
+                myItemsList.appendChild(addItemBtn);
+            
                 
 
-                myItemsList.appendChild(addItemBtn);
-
             myProject.appendChild(myItemsList)
+
+
+            //btn for removing a project -- not defaultProject
+            if (project[0] !== 'defaultProject') {
+                let removeProjBtn = document.createElement("button");
+                removeProjBtn.textContent = "Remove Project";
+                removeProjBtn.addEventListener('click', () => {
+                    projectManager(allProjects).removeProject(allProjects.indexOf(project));
+                    createSidebarList();
+                })
+
+            myProject.appendChild(removeProjBtn); 
+            }
+            
     
             projectsList.appendChild(myProject);
-            console.log(myProject);
+
         });
 
 
@@ -72,16 +100,13 @@ const populatePage = (allProjects) => {
         createSidebarList(); // reloads sidebar content
     });
 
-    
 
 
+    console.log(allProjects);
     };
     createSidebarList();
     
     
-
-
-
 
 
     sidebar.appendChild(projectsList);

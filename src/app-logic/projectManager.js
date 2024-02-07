@@ -16,9 +16,20 @@ const projectManager = (allProjects) => {
             project.push(myItem);
         }
 
+        function removeProject (projectIndex) {
+            allProjects.splice(projectIndex, 1);
+        };
+
+        function removeItem (projectIndex, itemIndex) {
+            let project = allProjects[projectIndex];
+            project.splice(itemIndex, 1);
+        }
+
     return {
         createNewProject,
         addListItem,
+        removeProject,
+        removeItem,
     }
 }
 
