@@ -1,5 +1,4 @@
 // module to generate the base page layout
-import { create } from "yallist";
 import projectManager from "../app-logic/projectManager";
 
 const populatePage = (allProjects) => {
@@ -9,6 +8,7 @@ const populatePage = (allProjects) => {
     //create a styled header
     const hero = document.createElement("h1");
     hero.textContent = "placeholder" // will be replaced when changing between screens 
+    hero.id = "hero";
     header.appendChild(hero);
 
 
@@ -23,25 +23,40 @@ const populatePage = (allProjects) => {
 
         allProjects.forEach(project => {
             let myProject = document.createElement('li');
-            myProject.textContent = project[0]; // display the title of the project
-            
+
+            let myProjectTitle = document.createElement('span');
+            myProjectTitle.textContent = project[0]; // display the title of the project
+            myProjectTitle.classList = ("project-title");
+            myProject.appendChild(myProjectTitle);
+
+
             let myItemsList = document.createElement('ul');
     
                 project.forEach(item => { // loop to display the title of each ITEM
                     if (item.title) { 
                         let myItem = document.createElement('li');
-                        myItem.textContent = item.title;
+
+                        let itemDiv = document.createElement('div');
+                        let itemSpan = document.createElement('span');
+                        
+
+                        itemSpan.textContent = item.title;
 
                         //btn for removing an item
                         const removeItemBtn = document.createElement('button');
-                        removeItemBtn.textContent = "-";
+                        removeItemBtn.textContent = "x";
 
                         removeItemBtn.addEventListener('click', () => {
                            projectManager(allProjects).removeItem(allProjects.indexOf(project), project.indexOf(item));
                            createSidebarList();
                         });
 
-                        myItem.appendChild(removeItemBtn);
+
+                        itemDiv.appendChild(itemSpan);
+                        itemDiv.appendChild(removeItemBtn);
+                        myItem.appendChild(itemDiv);
+
+
 
                         myItemsList.appendChild(myItem);
                     };
