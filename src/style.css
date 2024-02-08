@@ -16,10 +16,10 @@ body {
 
 #main {
     display: grid;
-    grid-template-columns: 40vw;
+    grid-template-columns: 40vw 60vw;
 }
 
-ul {
+#sidebar ul {
     list-style: none;
     padding: 0;
 }
@@ -56,4 +56,23 @@ ul {
     background-color: pink;
     border-radius: 15px;
     font-weight: 1000;
+}
+
+
+
+
+.liItem {
+    display: flex;
+    flex-direction: row;
+}
+
+#mainWindow ul {
+    padding: 0;
+}
+
+#mainWindow ul li div {
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 10vw 30vw 20vw;
+    gap: 5px;
 }

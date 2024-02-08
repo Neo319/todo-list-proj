@@ -39,10 +39,10 @@ body {
 
 #main {
     display: grid;
-    grid-template-columns: 40vw;
+    grid-template-columns: 40vw 60vw;
 }
 
-ul {
+#sidebar ul {
     list-style: none;
     padding: 0;
 }
@@ -80,7 +80,25 @@ ul {
     border-radius: 15px;
     font-weight: 1000;
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;IACI,2BAA2B;IAC3B,6EAA6E;AACjF;;;;AAIA;IACI,SAAS;AACb;;AAEA;IACI,YAAY;IACZ,SAAS;AACb;;AAEA;IACI,aAAa;IACb,2BAA2B;AAC/B;;AAEA;IACI,gBAAgB;IAChB,UAAU;AACd;;AAEA;IACI,sBAAsB;IACtB,YAAY;AAChB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,8BAA8B;IAC9B,2BAA2B;AAC/B;;AAEA;IACI,iBAAiB;AACrB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,kCAAkC;IAClC,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,sBAAsB;IACtB,mBAAmB;IACnB,iBAAiB;AACrB","sourcesContent":["* {\n    /* border: 1px solid red; */\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n}\n\n\n\nbody {\n    margin: 0;\n}\n\n#header {\n    height: 10vh;\n    margin: 0;\n} \n\n#main {\n    display: grid;\n    grid-template-columns: 40vw;\n}\n\nul {\n    list-style: none;\n    padding: 0;\n}\n\n#sidebar {\n    border: 1px solid gray;\n    height: 90vh;\n}\n\n#sidebar * {\n    margin-bottom: 5px;\n}\n\n#sidebar .project-title {\n    font-size: 1.2em;\n    font-weight: 1000;\n    border-bottom: 2px dotted gray;\n    /* margin-bottom: 120px;  */\n}\n\n#sidebar li ul {\n    padding-top: 10px;\n}\n\n#sidebar li ul li div {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px solid lightgray;\n    margin-right: 4px;\n    margin-left: 4px;\n}\n\n#sidebar li ul li div button {\n    background-color: pink;\n    border-radius: 15px;\n    font-weight: 1000;\n}\n"],"sourceRoot":""}]);
+
+
+
+
+.liItem {
+    display: flex;
+    flex-direction: row;
+}
+
+#mainWindow ul {
+    padding: 0;
+}
+
+#mainWindow ul li div {
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 10vw 30vw 20vw;
+    gap: 5px;
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;IACI,2BAA2B;IAC3B,6EAA6E;AACjF;;;;AAIA;IACI,SAAS;AACb;;AAEA;IACI,YAAY;IACZ,SAAS;AACb;;AAEA;IACI,aAAa;IACb,gCAAgC;AACpC;;AAEA;IACI,gBAAgB;IAChB,UAAU;AACd;;AAEA;IACI,sBAAsB;IACtB,YAAY;AAChB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,8BAA8B;IAC9B,2BAA2B;AAC/B;;AAEA;IACI,iBAAiB;AACrB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,kCAAkC;IAClC,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,sBAAsB;IACtB,mBAAmB;IACnB,iBAAiB;AACrB;;;;;AAKA;IACI,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,WAAW;IACX,aAAa;IACb,qCAAqC;IACrC,QAAQ;AACZ","sourcesContent":["* {\n    /* border: 1px solid red; */\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n}\n\n\n\nbody {\n    margin: 0;\n}\n\n#header {\n    height: 10vh;\n    margin: 0;\n} \n\n#main {\n    display: grid;\n    grid-template-columns: 40vw 60vw;\n}\n\n#sidebar ul {\n    list-style: none;\n    padding: 0;\n}\n\n#sidebar {\n    border: 1px solid gray;\n    height: 90vh;\n}\n\n#sidebar * {\n    margin-bottom: 5px;\n}\n\n#sidebar .project-title {\n    font-size: 1.2em;\n    font-weight: 1000;\n    border-bottom: 2px dotted gray;\n    /* margin-bottom: 120px;  */\n}\n\n#sidebar li ul {\n    padding-top: 10px;\n}\n\n#sidebar li ul li div {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px solid lightgray;\n    margin-right: 4px;\n    margin-left: 4px;\n}\n\n#sidebar li ul li div button {\n    background-color: pink;\n    border-radius: 15px;\n    font-weight: 1000;\n}\n\n\n\n\n.liItem {\n    display: flex;\n    flex-direction: row;\n}\n\n#mainWindow ul {\n    padding: 0;\n}\n\n#mainWindow ul li div {\n    width: 100%;\n    display: grid; \n    grid-template-columns: 10vw 30vw 20vw;\n    gap: 5px;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -675,6 +693,85 @@ const populatePage = (allProjects) => {
 
 /***/ }),
 
+/***/ "./src/DOM-logic/projects-page.js":
+/*!****************************************!*\
+  !*** ./src/DOM-logic/projects-page.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// module governing the display of the 'Project' view in the main window
+
+const projectsPage =  (project) => {
+    const main = document.getElementById("mainWindow");
+    main.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.textContent = "Viewing Project: " + project[0]; // displays title of loaded project
+    
+    main.appendChild(title);
+
+
+    // dynamically display the name of the loaded project
+    
+    // list project items
+
+    const projectList = document.createElement('ul');
+    
+    project.forEach(item => {
+        if (item.title) {
+            const liItem = document.createElement('li');
+            liItem.classList = "liItem";
+            const itemDiv = document.createElement('div');
+            const completed = document.createElement('input');
+            const title = document.createElement('span');
+            const date = document.createElement('span');
+            const priority = item.priority;
+
+            
+
+            //priority colors: 0 - black; 1 - blue; 2 - red
+            if (priority === 1) {
+                itemDiv.style = "color: blue";
+            } else if (priority === 2) {
+                itemDiv.style = "color: red";
+            }
+
+            completed.type = 'checkbox';
+            itemDiv.appendChild (completed);
+            
+            title.textContent = item.title; 
+            itemDiv.appendChild(title);
+
+            date.textContent = item.dueDate;
+            itemDiv.appendChild(date);
+
+            liItem.appendChild(itemDiv);
+            projectList.appendChild(liItem);
+
+
+
+        }
+    });
+
+
+    main.appendChild(projectList);
+    
+
+    // each li item contains: title, dueDate, priority color coding, completed checkbox '
+    
+    //edit each of these features in the individual item view
+
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (projectsPage);
+
+/***/ }),
+
 /***/ "./src/app-logic/addToProject.js":
 /*!***************************************!*\
   !*** ./src/app-logic/addToProject.js ***!
@@ -791,32 +888,6 @@ const projectManager = (allProjects) => {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (projectManager);
 
-/***/ }),
-
-/***/ "./src/app-logic/removeFromProject.js":
-/*!********************************************!*\
-  !*** ./src/app-logic/removeFromProject.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-// module governing how items can be removed from 'project' arrays
-
-// how items are removed
-const removeFromProject = (array, itemIndex) => {
-
-    if (!(itemIndex <= array.length)) {
-        console.log ("removeFromProject ERROR");
-    } else {
-        array.splice(itemIndex, 1)
-    }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (removeFromProject);
-
 /***/ })
 
 /******/ 	});
@@ -902,8 +973,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/style.css */ "./src/style.css");
 /* harmony import */ var _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-logic/itemMaker.js */ "./src/app-logic/itemMaker.js");
 /* harmony import */ var _app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app-logic/addToProject.js */ "./src/app-logic/addToProject.js");
-/* harmony import */ var _app_logic_removeFromProject_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-logic/removeFromProject.js */ "./src/app-logic/removeFromProject.js");
-/* harmony import */ var _DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DOM-logic/populate-sidebar.js */ "./src/DOM-logic/populate-sidebar.js");
+/* harmony import */ var _DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DOM-logic/populate-sidebar.js */ "./src/DOM-logic/populate-sidebar.js");
+/* harmony import */ var _DOM_logic_projects_page_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DOM-logic/projects-page.js */ "./src/DOM-logic/projects-page.js");
+
 
 
 
@@ -920,18 +992,21 @@ const defaultProject = ['defaultProject']; // the project that all items are add
 // the first item in every project array is a string containing its title
 
 // listItem properties: Title, description, dueDate, priority, completed
-const testItem = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"]('Laundry', 'do the laundry', 'today', '2', false);
+const testItem = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"]('Laundry', 'do the laundry', 'today', 2, false);
 
 (0,_app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultProject, testItem);
 
 
-const test2 = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"] ('TEST', 'test', 'today', '1', false);
+const test2 = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"] ('TEST', 'test', 'today', 1, false);
 (0,_app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultProject, test2);
 
 
 
 const allProjects = [defaultProject];
-(0,_DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects); // loading the sidebar
+(0,_DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_3__["default"])(allProjects); // loading the sidebar
+
+(0,_DOM_logic_projects_page_js__WEBPACK_IMPORTED_MODULE_4__["default"])(defaultProject); // default main window content
+
 
 
 
