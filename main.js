@@ -943,7 +943,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const populatePage = (allProjects) => {
     const header = document.getElementById("header");
-    const main = document.getElementById("main");
+    const main = document.getElementById("sidebar");
 
     //create a styled header
     const hero = document.createElement("h1");
@@ -1315,9 +1315,7 @@ const test2 = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"
 
 
 const allProjects = [defaultProject];
-(0,_DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
-
-console.log(allProjects);
+(0,_DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects); // loading the sidebar
 
 
 
