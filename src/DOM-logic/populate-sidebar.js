@@ -35,6 +35,10 @@ const populatePage = (allProjects) => {
             myProject.appendChild(myProjectTitle);
 
             // add event listeners for changing loaded project
+            myProjectTitle.addEventListener('click', () => {
+                reloadMainWindow(project);
+                loadedProject = project[0];
+            })
 
 
             let myItemsList = document.createElement('ul');
