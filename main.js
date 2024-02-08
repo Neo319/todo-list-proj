@@ -556,7 +556,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/projectManager */ "./src/app-logic/projectManager.js");
+/* harmony import */ var _projects_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./projects-page */ "./src/DOM-logic/projects-page.js");
 // module to generate the base page layout
+
 
 
 const populatePage = (allProjects) => {
@@ -569,6 +571,8 @@ const populatePage = (allProjects) => {
     hero.id = "hero";
     header.appendChild(hero);
 
+    let loadedProject = 'defaultProject'; // which project is currently loaded in the main window
+
 
 
     // create a gridded body with a sidebar for navigating btw projects & items
@@ -580,12 +584,16 @@ const populatePage = (allProjects) => {
         projectsList.innerHTML = '';
 
         allProjects.forEach(project => {
+            let projectIndex = allProjects.indexOf(project);
+
             let myProject = document.createElement('li');
 
             let myProjectTitle = document.createElement('span');
             myProjectTitle.textContent = project[0]; // display the title of the project
             myProjectTitle.classList = ("project-title");
             myProject.appendChild(myProjectTitle);
+
+            // add event listeners for changing loaded project
 
 
             let myItemsList = document.createElement('ul');
@@ -603,10 +611,12 @@ const populatePage = (allProjects) => {
                         //btn for removing an item
                         const removeItemBtn = document.createElement('button');
                         removeItemBtn.textContent = "x";
+                        removeItemBtn.classList = projectIndex;
 
                         removeItemBtn.addEventListener('click', () => {
                            (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects).removeItem(allProjects.indexOf(project), project.indexOf(item));
                            createSidebarList();
+                           if (loadedProject === project[0]) {reloadMainWindow(project)}; //reload window when an item is deleted if the same project is loaded
                         });
 
 
@@ -632,6 +642,7 @@ const populatePage = (allProjects) => {
                 addItemBtn.addEventListener('click', () => {
                     (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects).addListItem(allProjects.indexOf(project));
                     createSidebarList();
+                    if (loadedProject === project[0]) {reloadMainWindow(project)}; 
                 });
             
                 myItemsList.appendChild(addItemBtn);
@@ -684,6 +695,11 @@ const populatePage = (allProjects) => {
 
     sidebar.appendChild(projectsList);
     main.appendChild(sidebar);
+
+
+    function reloadMainWindow (project) {
+        (0,_projects_page__WEBPACK_IMPORTED_MODULE_1__["default"])(project);
+    }
 
 }
 
