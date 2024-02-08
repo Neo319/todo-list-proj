@@ -25,9 +25,7 @@ addToProject(defaultProject, test2);
 
 
 const allProjects = [defaultProject];
-populatePage(allProjects);
-
-console.log(allProjects);
+populatePage(allProjects); // loading the sidebar
 
 
 

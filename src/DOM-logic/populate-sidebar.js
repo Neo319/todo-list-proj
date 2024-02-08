@@ -4,7 +4,7 @@ import projectManager from "../app-logic/projectManager";
 
 const populatePage = (allProjects) => {
     const header = document.getElementById("header");
-    const main = document.getElementById("main");
+    const main = document.getElementById("sidebar");
 
     //create a styled header
     const hero = document.createElement("h1");
