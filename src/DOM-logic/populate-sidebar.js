@@ -1,5 +1,6 @@
 // module to generate the base page layout
 import projectManager from "../app-logic/projectManager";
+import projectsPage from "./projects-page";
 
 const populatePage = (allProjects) => {
     const header = document.getElementById("header");
@@ -10,6 +11,8 @@ const populatePage = (allProjects) => {
     hero.textContent = "placeholder" // will be replaced when changing between screens 
     hero.id = "hero";
     header.appendChild(hero);
+
+    let loadedProject = 'defaultProject'; // which project is currently loaded in the main window
 
 
 
@@ -22,12 +25,16 @@ const populatePage = (allProjects) => {
         projectsList.innerHTML = '';
 
         allProjects.forEach(project => {
+            let projectIndex = allProjects.indexOf(project);
+
             let myProject = document.createElement('li');
 
             let myProjectTitle = document.createElement('span');
             myProjectTitle.textContent = project[0]; // display the title of the project
             myProjectTitle.classList = ("project-title");
             myProject.appendChild(myProjectTitle);
+
+            // add event listeners for changing loaded project
 
 
             let myItemsList = document.createElement('ul');
@@ -45,10 +52,12 @@ const populatePage = (allProjects) => {
                         //btn for removing an item
                         const removeItemBtn = document.createElement('button');
                         removeItemBtn.textContent = "x";
+                        removeItemBtn.classList = projectIndex;
 
                         removeItemBtn.addEventListener('click', () => {
                            projectManager(allProjects).removeItem(allProjects.indexOf(project), project.indexOf(item));
                            createSidebarList();
+                           if (loadedProject === project[0]) {reloadMainWindow(project)}; //reload window when an item is deleted if the same project is loaded
                         });
 
 
@@ -74,6 +83,7 @@ const populatePage = (allProjects) => {
                 addItemBtn.addEventListener('click', () => {
                     projectManager(allProjects).addListItem(allProjects.indexOf(project));
                     createSidebarList();
+                    if (loadedProject === project[0]) {reloadMainWindow(project)}; 
                 });
             
                 myItemsList.appendChild(addItemBtn);
@@ -126,6 +136,11 @@ const populatePage = (allProjects) => {
 
     sidebar.appendChild(projectsList);
     main.appendChild(sidebar);
+
+
+    function reloadMainWindow (project) {
+        projectsPage(project);
+    }
 
 }
 
