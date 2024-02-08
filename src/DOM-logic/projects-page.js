@@ -5,12 +5,42 @@ const projectsPage =  (project) => {
     main.innerHTML = '';
 
     const title = document.createElement('h3');
-    title.textContent = "Viewing Project: " + project[0]; // displays title of loaded project
+    title.textContent = "Viewing Project:"  ; 
+
+    let titleDiv = document.createElement('div');
+    let projectTitle = document.createElement('h4');
+    projectTitle.style = "font-weight: 1000; margin-left: 10vw";
+    projectTitle.textContent = project[0]; // displays title of loaded project
     
+
+   
+
+    if (project[0] != "defaultProject") {
+    projectTitle.addEventListener('click', function renameTitle () {
+        const notification = document.createElement('span')
+        notification.textContent = "Please input a new Project name."
+        titleDiv.appendChild (notification);
+
+        const titleField = document.createElement('input');
+        titleField.type = 'field';
+        titleDiv.appendChild (titleField);
+
+        titleField.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter' && titleField.value != '') {
+                const userInput = titleField.value;
+                project[0] = userInput;
+                projectTitle.textContent = userInput;
+                console.log(project);
+
+
+            }
+        });
+    })};
+
     main.appendChild(title);
+    titleDiv.appendChild(projectTitle);
+    main.appendChild(titleDiv);
 
-
-    // dynamically display the name of the loaded project
     
     // list project items
 
