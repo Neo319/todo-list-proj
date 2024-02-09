@@ -812,6 +812,7 @@ const projectsPage =  (allProjects, project = allProjects[1]) => {
             }
 
             completed.type = 'checkbox';
+            completed.checked = item.completed;
             itemDiv.appendChild (completed);
             
             title.textContent = item.title; 
@@ -824,6 +825,12 @@ const projectsPage =  (allProjects, project = allProjects[1]) => {
             projectList.appendChild(liItem);
 
 
+
+            // can mark items as complete using checkbox
+            completed.addEventListener('click', () => {
+                let userInput = completed.checked;
+                (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects).itemCompleteStatus(item, userInput);
+            })
 
         }
     });
@@ -933,17 +940,17 @@ __webpack_require__.r(__webpack_exports__);
 const projectManager = (allProjects) => {
 
         function createNewProject () { // create new project whose contents can be edited elsewhere, 
-            let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 1, false);
+            let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 0, false);
             let myProj = ['New Project', myItem];
             allProjects.push(myProj);
-        }
+        };
 
         function addListItem (projectIndex) {
-            let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 1, false);
+            let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 0, false);
             
             let project = allProjects[projectIndex];
             project.push(myItem);
-        }
+        };
 
         function removeProject (projectIndex) {
             allProjects.splice(projectIndex, 1);
@@ -952,14 +959,20 @@ const projectManager = (allProjects) => {
         function removeItem (projectIndex, itemIndex) {
             let project = allProjects[projectIndex];
             project.splice(itemIndex, 1);
-        }
+        };
 
         function renameProject (project, newName) {
             project[0] = newName;
             console.log(project);
 
-            (0,_DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects).
-            projectsPage(allProjects, project);
+            (0,_DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects);
+            (0,_DOM_logic_projects_page__WEBPACK_IMPORTED_MODULE_2__["default"])(allProjects, project); // the projects page is always loaded when renaming projects
+        };
+
+
+        // item functions
+        function itemCompleteStatus (item, input) {
+            item.completed = input;
         }
 
     return {
@@ -968,6 +981,7 @@ const projectManager = (allProjects) => {
         removeProject,
         removeItem,
         renameProject,
+        itemCompleteStatus,
     }
 }
 
