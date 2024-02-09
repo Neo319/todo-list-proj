@@ -595,12 +595,14 @@ const loadItem = (allProjects, project, item) => {
 
     //event listeners to rename item 
     itemTitle.addEventListener('click', function renameItem () {
-        let newTitle = addInputField(itemTitle, renameItem, function (userInput) {
+        addInputField(itemTitle, renameItem, function (userInput) {
             console.log(userInput);
             (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects).renameItem(project, item, userInput);
         })
     
     });
+
+
     
 
     titleDiv.appendChild(complete);
@@ -608,6 +610,29 @@ const loadItem = (allProjects, project, item) => {
 
     main.appendChild(projectTitle);
     main.appendChild(titleDiv);
+
+
+
+
+    //description
+
+    const description = document.createElement('p');
+    const descriptionHeader = document.createElement('h5');
+    descriptionHeader.textContent = 'Description:';
+
+    description.textContent = item.description;
+
+    //event listeners to rewrite description
+    description.addEventListener('click', function rewriteDesc () {
+        addInputField(description, rewriteDesc, function (userInput) {
+            (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects).rewriteDescription(project, item, userInput);
+        })
+    }) 
+
+
+    main.appendChild(descriptionHeader);
+    main.appendChild(description);
+    
     
 
 
@@ -1097,11 +1122,20 @@ const projectManager = (allProjects) => {
 
         function renameItem (project, item, input) {
             item.title = input;
+            reloadItemPage(allProjects, project, item)
+            
+        }
 
+        function rewriteDescription (project, item, input) {
+            item.description = input;
+            reloadItemPage(allProjects, project, item);
+        }
+
+
+        function reloadItemPage (allProjects, project, item) {
             (0,_DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects); //reload sidebar
             (0,_DOM_logic_item_page__WEBPACK_IMPORTED_MODULE_3__["default"])(allProjects, project, item); //reload item
         }
-
     return {
         createNewProject,
         addListItem,
@@ -1111,6 +1145,7 @@ const projectManager = (allProjects) => {
 
         itemCompleteStatus,
         renameItem,
+        rewriteDescription,
 
     }
 }
