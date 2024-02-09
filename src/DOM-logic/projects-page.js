@@ -1,6 +1,8 @@
-// module governing the display of the 'Project' view in the main window
+// module governing the display of the 'Project' view in the main window'
+import projectManager from "../app-logic/projectManager";
 
-const projectsPage =  (project) => {
+const projectsPage =  (allProjects, project = allProjects[1]) => {
+    console.log(project);
     const main = document.getElementById("mainWindow");
     main.innerHTML = '';
 
@@ -15,8 +17,10 @@ const projectsPage =  (project) => {
 
    
 
+    function addRenameEventListener () {
     if (project[0] != "defaultProject") {
-    projectTitle.addEventListener('click', function renameTitle () {
+    projectTitle.addEventListener('click', function renameTitle () { // title renaming functionality
+        projectTitle.removeEventListener('click', renameTitle);
         const notification = document.createElement('span')
         notification.textContent = "Please input a new Project name."
         titleDiv.appendChild (notification);
@@ -24,18 +28,29 @@ const projectsPage =  (project) => {
         const titleField = document.createElement('input');
         titleField.type = 'field';
         titleDiv.appendChild (titleField);
+        titleField.focus();
 
-        titleField.addEventListener('keypress', function (event) {
+        titleField.addEventListener('keypress', function (event) { // a value is entered
             if (event.key === 'Enter' && titleField.value != '') {
+                            
                 const userInput = titleField.value;
-                project[0] = userInput;
-                projectTitle.textContent = userInput;
-                console.log(project);
-
+                // project[0] = userInput;
+                // projectTitle.textContent = userInput;
+                projectManager(allProjects).renameProject(project, userInput);
 
             }
         });
-    })};
+    
+        
+        titleField.addEventListener('focusout', () => { // focused out = close the field and reset the fn
+            titleDiv.removeChild(titleField);
+            titleDiv.removeChild(notification);
+            addRenameEventListener();
+        })
+
+        })};
+    };
+    addRenameEventListener();
 
     main.appendChild(title);
     titleDiv.appendChild(projectTitle);

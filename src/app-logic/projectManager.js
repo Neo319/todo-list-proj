@@ -1,6 +1,9 @@
 // module for adding, removing, and editing projects
 import ListItem from "../app-logic/itemMaker";
 
+import populatePage from "../DOM-logic/populate-sidebar";
+import projectsPage from "../DOM-logic/projects-page";
+
 const projectManager = (allProjects) => {
 
         function createNewProject () { // create new project whose contents can be edited elsewhere, 
@@ -25,11 +28,20 @@ const projectManager = (allProjects) => {
             project.splice(itemIndex, 1);
         }
 
+        function renameProject (project, newName) {
+            project[0] = newName;
+            console.log(project);
+
+            populatePage(allProjects).
+            projectsPage(allProjects, project);
+        }
+
     return {
         createNewProject,
         addListItem,
         removeProject,
         removeItem,
+        renameProject,
     }
 }
 

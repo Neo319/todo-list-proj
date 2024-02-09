@@ -5,6 +5,8 @@ import projectsPage from "./projects-page";
 const populatePage = (allProjects) => {
     const header = document.getElementById("header");
     const main = document.getElementById("sidebar");
+    header.innerHTML = '';
+    main.innerHTML = '';
 
     //create a styled header
     const hero = document.createElement("h1");
@@ -143,10 +145,13 @@ const populatePage = (allProjects) => {
 
 
     function reloadMainWindow (project) {
-        projectsPage(project);
+        projectsPage(allProjects, project);
     }
+
+    // function reloadSidebar() {
+    //     createSidebarList();
+    // }
 
 }
 
-export default populatePage;
-
+export default populatePage; 
