@@ -556,7 +556,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _projects_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projects-page */ "./src/DOM-logic/projects-page.js");
+/* harmony import */ var _app_logic_projectManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../app-logic/projectManager */ "./src/app-logic/projectManager.js");
 // page for loading and editing individual items
+
 
 
 
@@ -574,7 +576,16 @@ const loadItem = (allProjects, project, item) => {
     //event listeners for returning to project view
     projectTitle.addEventListener('click', () => {
         (0,_projects_page__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects, project);
-    })
+    });
+
+    //event listeners to rename item 
+    itemTitle.addEventListener('click', function renameItem () {
+        let newTitle = addInputField(itemTitle, renameItem, function (userInput) {
+            console.log(userInput);
+            (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects).renameItem(project, item, userInput);
+        })
+    
+    });
     
 
     titleDiv.appendChild(projectTitle);
@@ -583,6 +594,41 @@ const loadItem = (allProjects, project, item) => {
     main.appendChild(titleDiv);
     
 
+
+    function addInputField(location, source, callback) { 
+        //location: where the input field is appended.
+        //source: the function from which this is called -- to remove event listeners
+        //the function for handling user input when available
+
+        const message = document.createElement('h5');
+        message.textContent = 'Please enter a new value for this field.';
+        const myField = document.createElement('input');
+        myField.type = ('text');
+        location.appendChild(message);
+        location.appendChild(myField);
+
+        location.removeEventListener('click', source); 
+        console.log(source);
+        myField.focus();
+
+        myField.addEventListener('keypress', function (event) { //a value is entered
+            if (event.key === 'Enter' && myField.value != '') {
+                const userInput = myField.value;
+                callback(userInput);
+                
+            }
+        })
+
+        myField.addEventListener('focusout', () => { //element will be removed and event listeners restored
+            location.removeChild(message);
+            location.removeChild(myField);
+            location.addEventListener('click', source);
+        });
+
+        
+
+        
+    }
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadItem);
@@ -987,7 +1033,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/itemMaker */ "./src/app-logic/itemMaker.js");
 /* harmony import */ var _DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DOM-logic/populate-sidebar */ "./src/DOM-logic/populate-sidebar.js");
 /* harmony import */ var _DOM_logic_projects_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DOM-logic/projects-page */ "./src/DOM-logic/projects-page.js");
+/* harmony import */ var _DOM_logic_item_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DOM-logic/item-page */ "./src/DOM-logic/item-page.js");
 // module for adding, removing, and editing projects
+
 
 
 
@@ -1031,13 +1079,23 @@ const projectManager = (allProjects) => {
             item.completed = input;
         }
 
+        function renameItem (project, item, input) {
+            item.title = input;
+
+            (0,_DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects); //reload sidebar
+            (0,_DOM_logic_item_page__WEBPACK_IMPORTED_MODULE_3__["default"])(allProjects, project, item); //reload item
+        }
+
     return {
         createNewProject,
         addListItem,
         removeProject,
         removeItem,
         renameProject,
+
         itemCompleteStatus,
+        renameItem,
+
     }
 }
 
