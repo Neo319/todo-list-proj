@@ -568,14 +568,29 @@ const loadItem = (allProjects, project, item) => {
 
     const titleDiv = document.createElement('div');
     const projectTitle = document.createElement('span');
-    const itemTitle = document.createElement('h3');
+    const itemTitle = document.createElement('span');
+    const complete = document.createElement('input');
 
     projectTitle.textContent = project[0];
     itemTitle.textContent = item.title;
 
+    itemTitle.style = 'font-size: 1.5em; font-weight: 1000';
+
+    complete.type = 'checkbox';
+    complete.checked = item.completed;
+    
+    // event listeners for completed checkbox
+    complete.addEventListener('click', () => {
+        let userInput = complete.checked;
+        console.log (userInput);
+        (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects).itemCompleteStatus(item, userInput);
+    })
+    
+
+
     //event listeners for returning to project view
     projectTitle.addEventListener('click', () => {
-        (0,_projects_page__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects, project);
+        ;(0,_projects_page__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects, project);
     });
 
     //event listeners to rename item 
@@ -588,9 +603,10 @@ const loadItem = (allProjects, project, item) => {
     });
     
 
-    titleDiv.appendChild(projectTitle);
+    titleDiv.appendChild(complete);
     titleDiv.appendChild(itemTitle);
 
+    main.appendChild(projectTitle);
     main.appendChild(titleDiv);
     
 
@@ -908,7 +924,7 @@ const projectsPage =  (allProjects, project = allProjects[0]) => {
             }
 
             //event listeners: when itemDiv is clicked, open item view
-            itemDiv.addEventListener('click', () => {
+            title.addEventListener('click', () => {
                 (0,_item_page__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects, project, item)
             });
 
