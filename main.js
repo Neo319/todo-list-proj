@@ -564,6 +564,8 @@ __webpack_require__.r(__webpack_exports__);
 const populatePage = (allProjects) => {
     const header = document.getElementById("header");
     const main = document.getElementById("sidebar");
+    header.innerHTML = '';
+    main.innerHTML = '';
 
     //create a styled header
     const hero = document.createElement("h1");
@@ -702,13 +704,16 @@ const populatePage = (allProjects) => {
 
 
     function reloadMainWindow (project) {
-        (0,_projects_page__WEBPACK_IMPORTED_MODULE_1__["default"])(project);
+        (0,_projects_page__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects, project);
     }
+
+    // function reloadSidebar() {
+    //     createSidebarList();
+    // }
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (populatePage);
-
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (populatePage); 
 
 
 /***/ }),
@@ -723,9 +728,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// module governing the display of the 'Project' view in the main window
+/* harmony import */ var _app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/projectManager */ "./src/app-logic/projectManager.js");
+// module governing the display of the 'Project' view in the main window'
 
-const projectsPage =  (project) => {
+
+const projectsPage =  (allProjects, project = allProjects[1]) => {
+    console.log(project);
     const main = document.getElementById("mainWindow");
     main.innerHTML = '';
 
@@ -740,8 +748,10 @@ const projectsPage =  (project) => {
 
    
 
+    function addRenameEventListener () {
     if (project[0] != "defaultProject") {
-    projectTitle.addEventListener('click', function renameTitle () {
+    projectTitle.addEventListener('click', function renameTitle () { // title renaming functionality
+        projectTitle.removeEventListener('click', renameTitle);
         const notification = document.createElement('span')
         notification.textContent = "Please input a new Project name."
         titleDiv.appendChild (notification);
@@ -749,18 +759,29 @@ const projectsPage =  (project) => {
         const titleField = document.createElement('input');
         titleField.type = 'field';
         titleDiv.appendChild (titleField);
+        titleField.focus();
 
-        titleField.addEventListener('keypress', function (event) {
+        titleField.addEventListener('keypress', function (event) { // a value is entered
             if (event.key === 'Enter' && titleField.value != '') {
+                            
                 const userInput = titleField.value;
-                project[0] = userInput;
-                projectTitle.textContent = userInput;
-                console.log(project);
-
+                // project[0] = userInput;
+                // projectTitle.textContent = userInput;
+                (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects).renameProject(project, userInput);
 
             }
         });
-    })};
+    
+        
+        titleField.addEventListener('focusout', () => { // focused out = close the field and reset the fn
+            titleDiv.removeChild(titleField);
+            titleDiv.removeChild(notification);
+            addRenameEventListener();
+        })
+
+        })};
+    };
+    addRenameEventListener();
 
     main.appendChild(title);
     titleDiv.appendChild(projectTitle);
@@ -901,7 +922,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/itemMaker */ "./src/app-logic/itemMaker.js");
+/* harmony import */ var _DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DOM-logic/populate-sidebar */ "./src/DOM-logic/populate-sidebar.js");
+/* harmony import */ var _DOM_logic_projects_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DOM-logic/projects-page */ "./src/DOM-logic/projects-page.js");
 // module for adding, removing, and editing projects
+
+
+
 
 
 const projectManager = (allProjects) => {
@@ -928,11 +954,20 @@ const projectManager = (allProjects) => {
             project.splice(itemIndex, 1);
         }
 
+        function renameProject (project, newName) {
+            project[0] = newName;
+            console.log(project);
+
+            (0,_DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects).
+            projectsPage(allProjects, project);
+        }
+
     return {
         createNewProject,
         addListItem,
         removeProject,
         removeItem,
+        renameProject,
     }
 }
 
@@ -1055,7 +1090,7 @@ const test2 = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"
 const allProjects = [defaultProject];
 (0,_DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_3__["default"])(allProjects); // loading the sidebar
 
-(0,_DOM_logic_projects_page_js__WEBPACK_IMPORTED_MODULE_4__["default"])(defaultProject); // default main window content
+(0,_DOM_logic_projects_page_js__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects, defaultProject); // default main window content
 
 
 
