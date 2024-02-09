@@ -545,6 +545,50 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./src/DOM-logic/item-page.js":
+/*!************************************!*\
+  !*** ./src/DOM-logic/item-page.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _projects_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./projects-page */ "./src/DOM-logic/projects-page.js");
+// page for loading and editing individual items
+
+
+
+const loadItem = (allProjects, project, item) => {
+    const main = document.getElementById('mainWindow');
+    main.innerHTML = '';
+
+    const titleDiv = document.createElement('div');
+    const projectTitle = document.createElement('span');
+    const itemTitle = document.createElement('h3');
+
+    projectTitle.textContent = project[0];
+    itemTitle.textContent = item.title;
+
+    //event listeners for returning to project view
+    projectTitle.addEventListener('click', () => {
+        (0,_projects_page__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects, project);
+    })
+    
+
+    titleDiv.appendChild(projectTitle);
+    titleDiv.appendChild(itemTitle);
+
+    main.appendChild(titleDiv);
+    
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadItem);
+
+/***/ }),
+
 /***/ "./src/DOM-logic/populate-sidebar.js":
 /*!*******************************************!*\
   !*** ./src/DOM-logic/populate-sidebar.js ***!
@@ -734,10 +778,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _app_logic_projectManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../app-logic/projectManager */ "./src/app-logic/projectManager.js");
+/* harmony import */ var _item_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./item-page */ "./src/DOM-logic/item-page.js");
 // module governing the display of the 'Project' view in the main window'
 
 
-const projectsPage =  (allProjects, project = allProjects[1]) => {
+
+const projectsPage =  (allProjects, project = allProjects[0]) => {
     const main = document.getElementById("mainWindow");
     main.innerHTML = '';
 
@@ -814,6 +860,12 @@ const projectsPage =  (allProjects, project = allProjects[1]) => {
             } else if (priority === 2) {
                 itemDiv.style = "color: red";
             }
+
+            //event listeners: when itemDiv is clicked, open item view
+            itemDiv.addEventListener('click', () => {
+                (0,_item_page__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects, project, item)
+            });
+
 
             completed.type = 'checkbox';
             completed.checked = item.completed;
