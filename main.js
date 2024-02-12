@@ -22067,10 +22067,23 @@ const loadItem = (allProjects, project, item) => {
     projectTitle.textContent = project[0];
     itemTitle.textContent = item.title;
 
-    itemTitle.style = 'font-size: 1.5em; font-weight: 1000';
+    
 
     complete.type = 'checkbox';
     complete.checked = item.completed;
+
+    //priority color coding 
+    let styleString;
+    if (item.priority === 1) {styleString = "color: blue;"}
+    else if (item.priority === 2) {styleString = "color: red;"}
+    else {styleString = ''};
+
+    itemTitle.style = 'font-size: 1.5em; font-weight: 1000; ' + styleString;
+
+    console.log(styleString);
+
+
+
     
     // event listeners for completed checkbox
     complete.addEventListener('click', () => {
@@ -22146,6 +22159,12 @@ const loadItem = (allProjects, project, item) => {
 
 
 
+    const itemPriority = document.createElement('p');
+    itemPriority.style = styleString;
+    itemPriority.textContent = "Priority: " + (item.priority + 1) + " / 3"; //0 is displayed as 1, etc.
+
+
+    main.appendChild(itemPriority);
     
     
 
