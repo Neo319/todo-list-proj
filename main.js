@@ -33,7 +33,7 @@ body {
 }
 
 #header {
-    height: 10vh;
+    height: 15vh;
     margin: 0;
 
     display:flex;
@@ -43,6 +43,7 @@ body {
 } 
 .hero {
     margin-bottom: 0px;
+    font-size: 4vh;
 }
 
 #main {
@@ -106,7 +107,7 @@ body {
     display: grid; 
     grid-template-columns: 10vw 30vw 20vw;
     gap: 5px;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;IACI,2BAA2B;IAC3B,6EAA6E;AACjF;;;;AAIA;IACI,SAAS;AACb;;AAEA;IACI,YAAY;IACZ,SAAS;;IAET,YAAY;IACZ,sBAAsB;;;AAG1B;AACA;IACI,kBAAkB;AACtB;;AAEA;IACI,aAAa;IACb,gCAAgC;AACpC;;AAEA;IACI,gBAAgB;IAChB,UAAU;AACd;;AAEA;IACI,sBAAsB;IACtB,YAAY;AAChB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,8BAA8B;IAC9B,2BAA2B;AAC/B;;AAEA;IACI,iBAAiB;AACrB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,kCAAkC;IAClC,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,sBAAsB;IACtB,mBAAmB;IACnB,iBAAiB;AACrB;;;;;AAKA;IACI,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,WAAW;IACX,aAAa;IACb,qCAAqC;IACrC,QAAQ;AACZ","sourcesContent":["* {\n    /* border: 1px solid red; */\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n}\n\n\n\nbody {\n    margin: 0;\n}\n\n#header {\n    height: 10vh;\n    margin: 0;\n\n    display:flex;\n    flex-direction: column;\n    \n\n} \n.hero {\n    margin-bottom: 0px;\n}\n\n#main {\n    display: grid;\n    grid-template-columns: 40vw 60vw;\n}\n\n#sidebar ul {\n    list-style: none;\n    padding: 0;\n}\n\n#sidebar {\n    border: 1px solid gray;\n    height: 90vh;\n}\n\n#sidebar * {\n    margin-bottom: 5px;\n}\n\n#sidebar .project-title {\n    font-size: 1.2em;\n    font-weight: 1000;\n    border-bottom: 2px dotted gray;\n    /* margin-bottom: 120px;  */\n}\n\n#sidebar li ul {\n    padding-top: 10px;\n}\n\n#sidebar li ul li div {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px solid lightgray;\n    margin-right: 4px;\n    margin-left: 4px;\n}\n\n#sidebar li ul li div button {\n    background-color: pink;\n    border-radius: 15px;\n    font-weight: 1000;\n}\n\n\n\n\n.liItem {\n    display: flex;\n    flex-direction: row;\n}\n\n#mainWindow ul {\n    padding: 0;\n}\n\n#mainWindow ul li div {\n    width: 100%;\n    display: grid; \n    grid-template-columns: 10vw 30vw 20vw;\n    gap: 5px;\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;IACI,2BAA2B;IAC3B,6EAA6E;AACjF;;;;AAIA;IACI,SAAS;AACb;;AAEA;IACI,YAAY;IACZ,SAAS;;IAET,YAAY;IACZ,sBAAsB;;;AAG1B;AACA;IACI,kBAAkB;IAClB,cAAc;AAClB;;AAEA;IACI,aAAa;IACb,gCAAgC;AACpC;;AAEA;IACI,gBAAgB;IAChB,UAAU;AACd;;AAEA;IACI,sBAAsB;IACtB,YAAY;AAChB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,8BAA8B;IAC9B,2BAA2B;AAC/B;;AAEA;IACI,iBAAiB;AACrB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,kCAAkC;IAClC,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,sBAAsB;IACtB,mBAAmB;IACnB,iBAAiB;AACrB;;;;;AAKA;IACI,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,WAAW;IACX,aAAa;IACb,qCAAqC;IACrC,QAAQ;AACZ","sourcesContent":["* {\n    /* border: 1px solid red; */\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n}\n\n\n\nbody {\n    margin: 0;\n}\n\n#header {\n    height: 15vh;\n    margin: 0;\n\n    display:flex;\n    flex-direction: column;\n    \n\n} \n.hero {\n    margin-bottom: 0px;\n    font-size: 4vh;\n}\n\n#main {\n    display: grid;\n    grid-template-columns: 40vw 60vw;\n}\n\n#sidebar ul {\n    list-style: none;\n    padding: 0;\n}\n\n#sidebar {\n    border: 1px solid gray;\n    height: 90vh;\n}\n\n#sidebar * {\n    margin-bottom: 5px;\n}\n\n#sidebar .project-title {\n    font-size: 1.2em;\n    font-weight: 1000;\n    border-bottom: 2px dotted gray;\n    /* margin-bottom: 120px;  */\n}\n\n#sidebar li ul {\n    padding-top: 10px;\n}\n\n#sidebar li ul li div {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px solid lightgray;\n    margin-right: 4px;\n    margin-left: 4px;\n}\n\n#sidebar li ul li div button {\n    background-color: pink;\n    border-radius: 15px;\n    font-weight: 1000;\n}\n\n\n\n\n.liItem {\n    display: flex;\n    flex-direction: row;\n}\n\n#mainWindow ul {\n    padding: 0;\n}\n\n#mainWindow ul li div {\n    width: 100%;\n    display: grid; \n    grid-template-columns: 10vw 30vw 20vw;\n    gap: 5px;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22074,13 +22075,12 @@ const loadItem = (allProjects, project, item) => {
 
     //priority color coding 
     let styleString;
-    if (item.priority === 1) {styleString = "color: blue;"}
-    else if (item.priority === 2) {styleString = "color: red;"}
+    if (item.priority == 1) {styleString = "color: blue;"}
+    else if (item.priority == 2) {styleString = "color: red;"}
     else {styleString = ''};
 
     itemTitle.style = 'font-size: 1.5em; font-weight: 1000; ' + styleString;
 
-    console.log(styleString);
 
 
 
@@ -22161,10 +22161,23 @@ const loadItem = (allProjects, project, item) => {
 
     const itemPriority = document.createElement('p');
     itemPriority.style = styleString;
-    itemPriority.textContent = "Priority: " + (item.priority + 1) + " / 3"; //0 is displayed as 1, etc.
+    itemPriority.textContent = "Priority: " + (Number(item.priority) + 1) + " / 3"; //0 is displayed as 1, etc.
 
 
     main.appendChild(itemPriority);
+
+    const itemPrioritySlider = document.createElement('input');
+    itemPrioritySlider.type = 'range';
+    itemPrioritySlider.min = '0';
+    itemPrioritySlider.max = '2';
+    itemPrioritySlider.value = item.priority;
+    
+
+    itemPrioritySlider.addEventListener('input', function () {
+        (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects).setPriority(project, item, itemPrioritySlider.value);
+    });
+
+    main.appendChild(itemPrioritySlider);
     
     
 
@@ -22721,6 +22734,11 @@ const projectManager = (allProjects) => {
             console.log(input);
         }
 
+        function setPriority (project, item, input) {
+            item.priority = input;
+            (0,_DOM_logic_item_page__WEBPACK_IMPORTED_MODULE_3__["default"])(allProjects, project, item)
+        }
+
 
         function reloadItemPage (allProjects, project, item) {
             (0,_DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects); //reload sidebar
@@ -22737,6 +22755,7 @@ const projectManager = (allProjects) => {
         renameItem,
         rewriteDescription,
         setNewDate,
+        setPriority,
 
     }
 }
