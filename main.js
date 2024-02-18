@@ -107,7 +107,18 @@ body {
     display: grid; 
     grid-template-columns: 10vw 30vw 20vw;
     gap: 5px;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;IACI,2BAA2B;IAC3B,6EAA6E;AACjF;;;;AAIA;IACI,SAAS;AACb;;AAEA;IACI,YAAY;IACZ,SAAS;;IAET,YAAY;IACZ,sBAAsB;;;AAG1B;AACA;IACI,kBAAkB;IAClB,cAAc;AAClB;;AAEA;IACI,aAAa;IACb,gCAAgC;AACpC;;AAEA;IACI,gBAAgB;IAChB,UAAU;AACd;;AAEA;IACI,sBAAsB;IACtB,YAAY;AAChB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,8BAA8B;IAC9B,2BAA2B;AAC/B;;AAEA;IACI,iBAAiB;AACrB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,kCAAkC;IAClC,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,sBAAsB;IACtB,mBAAmB;IACnB,iBAAiB;AACrB;;;;;AAKA;IACI,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,WAAW;IACX,aAAa;IACb,qCAAqC;IACrC,QAAQ;AACZ","sourcesContent":["* {\n    /* border: 1px solid red; */\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n}\n\n\n\nbody {\n    margin: 0;\n}\n\n#header {\n    height: 15vh;\n    margin: 0;\n\n    display:flex;\n    flex-direction: column;\n    \n\n} \n.hero {\n    margin-bottom: 0px;\n    font-size: 4vh;\n}\n\n#main {\n    display: grid;\n    grid-template-columns: 40vw 60vw;\n}\n\n#sidebar ul {\n    list-style: none;\n    padding: 0;\n}\n\n#sidebar {\n    border: 1px solid gray;\n    height: 90vh;\n}\n\n#sidebar * {\n    margin-bottom: 5px;\n}\n\n#sidebar .project-title {\n    font-size: 1.2em;\n    font-weight: 1000;\n    border-bottom: 2px dotted gray;\n    /* margin-bottom: 120px;  */\n}\n\n#sidebar li ul {\n    padding-top: 10px;\n}\n\n#sidebar li ul li div {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px solid lightgray;\n    margin-right: 4px;\n    margin-left: 4px;\n}\n\n#sidebar li ul li div button {\n    background-color: pink;\n    border-radius: 15px;\n    font-weight: 1000;\n}\n\n\n\n\n.liItem {\n    display: flex;\n    flex-direction: row;\n}\n\n#mainWindow ul {\n    padding: 0;\n}\n\n#mainWindow ul li div {\n    width: 100%;\n    display: grid; \n    grid-template-columns: 10vw 30vw 20vw;\n    gap: 5px;\n}"],"sourceRoot":""}]);
+}
+
+
+.clickable {
+    background-color: #f0f0f0;
+    cursor: pointer; 
+    border-radius: 15px;
+}
+
+.clickable:hover {
+    background-color: #c0c0c0;
+}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"AAAA;IACI,2BAA2B;IAC3B,6EAA6E;AACjF;;;;AAIA;IACI,SAAS;AACb;;AAEA;IACI,YAAY;IACZ,SAAS;;IAET,YAAY;IACZ,sBAAsB;;;AAG1B;AACA;IACI,kBAAkB;IAClB,cAAc;AAClB;;AAEA;IACI,aAAa;IACb,gCAAgC;AACpC;;AAEA;IACI,gBAAgB;IAChB,UAAU;AACd;;AAEA;IACI,sBAAsB;IACtB,YAAY;AAChB;;AAEA;IACI,kBAAkB;AACtB;;AAEA;IACI,gBAAgB;IAChB,iBAAiB;IACjB,8BAA8B;IAC9B,2BAA2B;AAC/B;;AAEA;IACI,iBAAiB;AACrB;;AAEA;IACI,aAAa;IACb,8BAA8B;IAC9B,kCAAkC;IAClC,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,sBAAsB;IACtB,mBAAmB;IACnB,iBAAiB;AACrB;;;;;AAKA;IACI,aAAa;IACb,mBAAmB;AACvB;;AAEA;IACI,UAAU;AACd;;AAEA;IACI,WAAW;IACX,aAAa;IACb,qCAAqC;IACrC,QAAQ;AACZ;;;AAGA;IACI,yBAAyB;IACzB,eAAe;IACf,mBAAmB;AACvB;;AAEA;IACI,yBAAyB;AAC7B","sourcesContent":["* {\n    /* border: 1px solid red; */\n    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;\n}\n\n\n\nbody {\n    margin: 0;\n}\n\n#header {\n    height: 15vh;\n    margin: 0;\n\n    display:flex;\n    flex-direction: column;\n    \n\n} \n.hero {\n    margin-bottom: 0px;\n    font-size: 4vh;\n}\n\n#main {\n    display: grid;\n    grid-template-columns: 40vw 60vw;\n}\n\n#sidebar ul {\n    list-style: none;\n    padding: 0;\n}\n\n#sidebar {\n    border: 1px solid gray;\n    height: 90vh;\n}\n\n#sidebar * {\n    margin-bottom: 5px;\n}\n\n#sidebar .project-title {\n    font-size: 1.2em;\n    font-weight: 1000;\n    border-bottom: 2px dotted gray;\n    /* margin-bottom: 120px;  */\n}\n\n#sidebar li ul {\n    padding-top: 10px;\n}\n\n#sidebar li ul li div {\n    display: flex;\n    justify-content: space-between;\n    border-bottom: 1px solid lightgray;\n    margin-right: 4px;\n    margin-left: 4px;\n}\n\n#sidebar li ul li div button {\n    background-color: pink;\n    border-radius: 15px;\n    font-weight: 1000;\n}\n\n\n\n\n.liItem {\n    display: flex;\n    flex-direction: row;\n}\n\n#mainWindow ul {\n    padding: 0;\n}\n\n#mainWindow ul li div {\n    width: 100%;\n    display: grid; \n    grid-template-columns: 10vw 30vw 20vw;\n    gap: 5px;\n}\n\n\n.clickable {\n    background-color: #f0f0f0;\n    cursor: pointer; \n    border-radius: 15px;\n}\n\n.clickable:hover {\n    background-color: #c0c0c0;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22095,11 +22106,13 @@ const loadItem = (allProjects, project, item) => {
 
 
     //event listeners for returning to project view
+    projectTitle.classList.add('clickable');
     projectTitle.addEventListener('click', () => {
-        ;(0,_projects_page__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects, project);
+        (0,_projects_page__WEBPACK_IMPORTED_MODULE_0__["default"])(allProjects, project);
     });
 
     //event listeners to rename item 
+    itemTitle.classList.add('clickable');
     itemTitle.addEventListener('click', function renameItem () {
         addInputField(itemTitle, renameItem, function (userInput) {
             console.log(userInput);
@@ -22116,6 +22129,7 @@ const loadItem = (allProjects, project, item) => {
     dueDate.textContent = item.dueDate;
 
     //editing the dueDate
+    dueDate.classList.add('clickable');
     dueDate.addEventListener('click', function dateClicked () {
         setDate(dueDate, dateClicked, function (userInput) {
             let enteredDate = new Date(userInput);
@@ -22147,7 +22161,8 @@ const loadItem = (allProjects, project, item) => {
     description.textContent = item.description;
 
     //event listeners to rewrite description
-    description.addEventListener('click', function rewriteDesc () {
+    descriptionHeader.classList.add('clickable');
+    descriptionHeader.addEventListener('click', function rewriteDesc () {
         addInputField(description, rewriteDesc, function (userInput) {
             (0,_app_logic_projectManager__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects).rewriteDescription(project, item, userInput);
         })
@@ -22309,7 +22324,7 @@ const populatePage = (allProjects) => {
 
             let myProjectTitle = document.createElement('span');
             myProjectTitle.textContent = project[0]; // display the title of the project
-            myProjectTitle.classList = ("project-title");
+            myProjectTitle.classList.add ("project-title", "clickable");
             myProject.appendChild(myProjectTitle);
 
             // add event listeners for changing loaded project
@@ -22528,13 +22543,14 @@ const projectsPage =  (allProjects, project = allProjects[0]) => {
             
 
             //priority colors: 0 - black; 1 - blue; 2 - red
-            if (priority === 1) {
+            if (priority == 1) {
                 itemDiv.style = "color: blue";
-            } else if (priority === 2) {
+            } else if (priority == 2) {
                 itemDiv.style = "color: red";
             }
 
             //event listeners: when itemDiv is clicked, open item view
+            title.classList.add('clickable');
             title.addEventListener('click', () => {
                 (0,_item_page__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects, project, item)
             });
