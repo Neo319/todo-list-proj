@@ -22673,6 +22673,51 @@ const { format } = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/
 
 /***/ }),
 
+/***/ "./src/app-logic/loadData.js":
+/*!***********************************!*\
+  !*** ./src/app-logic/loadData.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _itemMaker_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./itemMaker.js */ "./src/app-logic/itemMaker.js");
+/* harmony import */ var _addToProject_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addToProject.js */ "./src/app-logic/addToProject.js");
+// function to look for and load data when page is opened
+
+
+
+
+const loadData = () => {
+    let storedData;
+    if (localStorage.getItem('storedProjects') != '') { // if data exists
+        storedData = JSON.parse(localStorage.getItem('storedProjects'));
+
+        console.log(storedData);
+
+    
+    } else { // no data exists --> initialization
+        console.log('no data found.')
+        const defaultProject = ['defaultProject']; // the project that all items are added to by default
+
+        const testItem = new _itemMaker_js__WEBPACK_IMPORTED_MODULE_0__["default"]('Laundry', 'do the laundry', 'today', 2, false);
+        (0,_addToProject_js__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultProject, testItem);
+
+        const test2 = new _itemMaker_js__WEBPACK_IMPORTED_MODULE_0__["default"] ('TEST', 'test', 'today', 1, false);
+        (0,_addToProject_js__WEBPACK_IMPORTED_MODULE_1__["default"])(defaultProject, test2);
+
+        let storedData = [defaultProject];
+        console.log(storedData);
+    }
+    return storedData;
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loadData);
+
+/***/ }),
+
 /***/ "./src/app-logic/projectManager.js":
 /*!*****************************************!*\
   !*** ./src/app-logic/projectManager.js ***!
@@ -22687,7 +22732,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DOM-logic/populate-sidebar */ "./src/DOM-logic/populate-sidebar.js");
 /* harmony import */ var _DOM_logic_projects_page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DOM-logic/projects-page */ "./src/DOM-logic/projects-page.js");
 /* harmony import */ var _DOM_logic_item_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DOM-logic/item-page */ "./src/DOM-logic/item-page.js");
+/* harmony import */ var _saveData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./saveData */ "./src/app-logic/saveData.js");
 // module for adding, removing, and editing projects
+
+
 
 
 
@@ -22701,6 +22749,7 @@ const projectManager = (allProjects) => {
             let myItem = new _app_logic_itemMaker__WEBPACK_IMPORTED_MODULE_0__["default"] ('New To-do item', 'description', 'today', 0, false);
             let myProj = ['New Project', myItem];
             allProjects.push(myProj);
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects)
         };
 
         function addListItem (projectIndex) {
@@ -22708,15 +22757,18 @@ const projectManager = (allProjects) => {
             
             let project = allProjects[projectIndex];
             project.push(myItem);
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         };
 
         function removeProject (projectIndex) {
             allProjects.splice(projectIndex, 1);
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         };
 
         function removeItem (projectIndex, itemIndex) {
             let project = allProjects[projectIndex];
             project.splice(itemIndex, 1);
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         };
 
         function renameProject (project, newName) {
@@ -22725,40 +22777,46 @@ const projectManager = (allProjects) => {
 
             (0,_DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects);
             (0,_DOM_logic_projects_page__WEBPACK_IMPORTED_MODULE_2__["default"])(allProjects, project); // the projects page is always loaded when renaming projects
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         };
 
 
         // item functions
         function itemCompleteStatus (item, input) {
             item.completed = input;
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         }
 
         function renameItem (project, item, input) {
             item.title = input;
-            reloadItemPage(allProjects, project, item)
+            reloadItemPage(allProjects, project, item);
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
             
         }
 
         function rewriteDescription (project, item, input) {
             item.description = input;
             reloadItemPage(allProjects, project, item);
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         }
         
         function setNewDate (project, item, input) {
             item.dueDate = input;
             reloadItemPage(allProjects, project, item);
-            console.log(input);
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         }
 
         function setPriority (project, item, input) {
             item.priority = input;
             (0,_DOM_logic_item_page__WEBPACK_IMPORTED_MODULE_3__["default"])(allProjects, project, item)
+            ;(0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         }
 
 
         function reloadItemPage (allProjects, project, item) {
             (0,_DOM_logic_populate_sidebar__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects); //reload sidebar
             (0,_DOM_logic_item_page__WEBPACK_IMPORTED_MODULE_3__["default"])(allProjects, project, item); //reload item
+            (0,_saveData__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects);
         }
     return {
         createNewProject,
@@ -22777,6 +22835,31 @@ const projectManager = (allProjects) => {
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (projectManager);
+
+/***/ }),
+
+/***/ "./src/app-logic/saveData.js":
+/*!***********************************!*\
+  !*** ./src/app-logic/saveData.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// function to save data every time a project is changed
+
+const save = (allProjects) => {
+
+    
+    localStorage.setItem('storedProjects', JSON.stringify(allProjects));
+
+    
+    console.log(localStorage.getItem("storedProjects"));
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (save);
 
 /***/ })
 
@@ -22861,10 +22944,9 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/style.css */ "./src/style.css");
-/* harmony import */ var _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-logic/itemMaker.js */ "./src/app-logic/itemMaker.js");
-/* harmony import */ var _app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app-logic/addToProject.js */ "./src/app-logic/addToProject.js");
-/* harmony import */ var _DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DOM-logic/populate-sidebar.js */ "./src/DOM-logic/populate-sidebar.js");
-/* harmony import */ var _DOM_logic_projects_page_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DOM-logic/projects-page.js */ "./src/DOM-logic/projects-page.js");
+/* harmony import */ var _DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DOM-logic/populate-sidebar.js */ "./src/DOM-logic/populate-sidebar.js");
+/* harmony import */ var _DOM_logic_projects_page_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DOM-logic/projects-page.js */ "./src/DOM-logic/projects-page.js");
+/* harmony import */ var _app_logic_loadData_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app-logic/loadData.js */ "./src/app-logic/loadData.js");
 
 
 
@@ -22873,31 +22955,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+let storedData = (0,_app_logic_loadData_js__WEBPACK_IMPORTED_MODULE_3__["default"])();
+console.log(storedData);
 
-console.log('ready to roll!');
-
-
-
-const defaultProject = ['defaultProject']; // the project that all items are added to by default
-// the first item in every project array is a string containing its title
-
-// listItem properties: Title, description, dueDate, priority, completed
-const testItem = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"]('Laundry', 'do the laundry', 'today', 2, false);
-
-(0,_app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultProject, testItem);
+const allProjects = storedData;
 
 
-const test2 = new _app_logic_itemMaker_js__WEBPACK_IMPORTED_MODULE_1__["default"] ('TEST', 'test', 'today', 1, false);
-(0,_app_logic_addToProject_js__WEBPACK_IMPORTED_MODULE_2__["default"])(defaultProject, test2);
+(0,_DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_1__["default"])(allProjects); // loading the sidebar
 
-
-
-const allProjects = [defaultProject];
-(0,_DOM_logic_populate_sidebar_js__WEBPACK_IMPORTED_MODULE_3__["default"])(allProjects); // loading the sidebar
-
-(0,_DOM_logic_projects_page_js__WEBPACK_IMPORTED_MODULE_4__["default"])(allProjects, defaultProject); // default main window content
-
-
+(0,_DOM_logic_projects_page_js__WEBPACK_IMPORTED_MODULE_2__["default"])(allProjects, allProjects[0]); // default main window content
 
 
 
